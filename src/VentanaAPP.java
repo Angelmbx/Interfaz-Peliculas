@@ -6,32 +6,32 @@ import java.io.IOException;
 
 public class VentanaAPP extends JFrame  implements ActionListener {
 
-    JButton reiniciar, salir, infantil, romantica, terror;
+    JButton reiniciar, salir, infantil, comedia, exitos;
     JPanel filaSuperior, filaCentral, filaInferior;
 
 
     public VentanaAPP() throws IOException {
         this.setLayout(new GridLayout(3,1));
-        infantil = new JButton("Infantil"); romantica=new JButton("Romantica"); terror= new JButton("Terror");
+        infantil = new JButton("Infantil"); comedia=new JButton("Comedia"); exitos= new JButton("Exitos");
         filaSuperior=new JPanel();
         filaSuperior.add(infantil);
-        filaSuperior.add(romantica);
-        filaSuperior.add(terror);
+        filaSuperior.add(comedia);
+        filaSuperior.add(exitos);
         this.add(filaSuperior);
         //hasta aquí fila superior
 
         filaCentral=new JPanel();
         filaCentral.setLayout(new GridLayout(1,3));
 
-        String ruta1 = "Resources/IMG_1115.JPG";
+        String ruta1 = "Resources/frozen.jpg";
         PanelImagenes p1 = new PanelImagenes(ruta1);
         filaCentral.add(p1);
 
-        String ruta2 = "Resources/IMG_2420.jpeg";
+        String ruta2 = "Resources/ParksAndRec.jpg";
         PanelImagenes p2 = new PanelImagenes(ruta2);
         filaCentral.add(p2);
 
-        String ruta3 = "Resources/IMG_2423.jpeg";
+        String ruta3 = "Resources/GoT.jpg";
         PanelImagenes p3 = new PanelImagenes(ruta3);
         filaCentral.add(p3);
 
@@ -48,7 +48,9 @@ public class VentanaAPP extends JFrame  implements ActionListener {
         this.add(filaInferior);
         //hasta aqui fila inferior
 
-        this.setSize(650,470);
+
+        this.setSize(720,800);
+        this.setTitle("Catálogo");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
