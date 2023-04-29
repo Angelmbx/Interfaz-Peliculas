@@ -43,14 +43,17 @@ public class VentanaAPP extends JFrame  implements ActionListener {
         panelCronometro.setLayout(new GridLayout(1,3));
         c1 = new Cronometro();
         panelCronometro.add(c1);
+        c1.setHorizontalAlignment((int) CENTER_ALIGNMENT);
         c1.setVisible(false);
 
         c2 = new Cronometro();
         panelCronometro.add(c2);
+        c2.setHorizontalAlignment((int) CENTER_ALIGNMENT);
         c2.setVisible(false);
 
         c3 = new Cronometro();
         panelCronometro.add(c3);
+        c3.setHorizontalAlignment((int) CENTER_ALIGNMENT);
         c3.setVisible(false);
 
         this.add(panelCronometro);
