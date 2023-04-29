@@ -7,16 +7,17 @@ import java.io.IOException;
 public class VentanaAPP extends JFrame  implements ActionListener {
 
     JButton reiniciar, salir, infantil, comedia, exitos;
-    JPanel filaSuperior, filaCentral, filaInferior;
+    JPanel filaSuperior, filaCentral, filaInferior, panelCronometro;
+    Cronometro c1,c2,c3;
 
 
     public VentanaAPP() throws IOException {
-        this.setLayout(new GridLayout(3,1));
+        this.setLayout(new GridLayout(4,1));
         infantil = new JButton("Infantil"); comedia=new JButton("Comedia"); exitos= new JButton("Exitos");
         filaSuperior=new JPanel();
-        filaSuperior.add(infantil);
-        filaSuperior.add(comedia);
-        filaSuperior.add(exitos);
+        filaSuperior.add(infantil); infantil.addActionListener(this);
+        filaSuperior.add(comedia);  comedia.addActionListener(this);
+        filaSuperior.add(exitos);   exitos.addActionListener(this);
         this.add(filaSuperior);
         //hasta aquí fila superior
 
@@ -38,13 +39,20 @@ public class VentanaAPP extends JFrame  implements ActionListener {
         this.add(filaCentral);
         //hasta aqui fila central
 
+        panelCronometro=new JPanel();
+        c1 = new Cronometro();
+        panelCronometro.add(c1);
+        c1.setVisible(false);
+        this.add(panelCronometro);
+        //hasta aqui panel cronometro
+
         filaInferior=new JPanel();
 
         reiniciar=new JButton("Reiniciar");
         salir=new JButton("Salir");
 
-        filaInferior.add(reiniciar);
-        filaInferior.add(salir);
+        filaInferior.add(reiniciar); reiniciar.addActionListener(this);
+        filaInferior.add(salir);     salir.addActionListener(this);
         this.add(filaInferior);
         //hasta aqui fila inferior
 
@@ -57,6 +65,15 @@ public class VentanaAPP extends JFrame  implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==infantil){
+            c1.setVisible(true);
+            c1.Start();
+        }
+
+
+        if(e.getSource()==salir){
+            dispose();
+        }
 
     }
 }
