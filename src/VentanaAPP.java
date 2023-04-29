@@ -40,11 +40,22 @@ public class VentanaAPP extends JFrame  implements ActionListener {
         //hasta aqui fila central
 
         panelCronometro=new JPanel();
+        panelCronometro.setLayout(new GridLayout(1,3));
         c1 = new Cronometro();
         panelCronometro.add(c1);
         c1.setVisible(false);
+
+        c2 = new Cronometro();
+        panelCronometro.add(c2);
+        c2.setVisible(false);
+
+        c3 = new Cronometro();
+        panelCronometro.add(c3);
+        c3.setVisible(false);
+
         this.add(panelCronometro);
         //hasta aqui panel cronometro
+
 
         filaInferior=new JPanel();
 
@@ -68,8 +79,22 @@ public class VentanaAPP extends JFrame  implements ActionListener {
         if(e.getSource()==infantil){
             c1.setVisible(true);
             c1.Start();
+            c2.End(); c2.setVisible(false);
+            c3.End(); c3.setVisible(false);
         }
 
+        if(e.getSource()==comedia){
+            c2.setVisible(true);
+            c2.Start();
+            c1.End(); c1.setVisible(false);
+            c3.End(); c3.setVisible(false);
+        }
+        if(e.getSource()==exitos){
+            c3.setVisible(true);
+            c3.Start();
+            c1.End(); c1.setVisible(false);
+            c2.End(); c2.setVisible(false);
+        }
 
         if(e.getSource()==salir){
             dispose();
