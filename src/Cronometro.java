@@ -8,11 +8,14 @@ public class Cronometro extends JLabel implements Serializable {
 
     private Timer timer;
     private TimerTask task;
-    private int segundos = 30;
+    private int segundos = 10;
     private String texto;
+    private boolean funcionando;
     public Cronometro(){
-    this.setText("30");
+    this.setText("10");
+    this.funcionando=false;
     }
+
 
 
     public void Start(){
@@ -21,15 +24,19 @@ public class Cronometro extends JLabel implements Serializable {
 
             @Override
             public void run() {
-                //do {
-                    segundos--;
-                    texto = Integer.toString(segundos);
-                    setText(texto);
-                //} while (texto != "-1");
-            }
+                    if (segundos > 0) {
+                        segundos--;
+                        texto = Integer.toString(segundos);
+                        setText(texto);
+                    } else {
+                        task.cancel();
+                    }
+
+                }
         };
         timer.schedule(task,0, 1000);
     }
+
 
     public void End(){
         task.cancel();
@@ -37,7 +44,8 @@ public class Cronometro extends JLabel implements Serializable {
 
     public void Reset (){
     task.cancel();
-    setText("30");
-    task.run();
+    setText("10");
+    segundos=10;
+
     }
 }

@@ -9,6 +9,7 @@ public class VentanaAPP extends JFrame  implements ActionListener {
     JButton reiniciar, salir, infantil, comedia, exitos;
     JPanel filaSuperior, filaCentral, filaInferior, panelCronometro;
     Cronometro c1,c2,c3;
+    PanelImagenes p1,p2,p3;
 
 
     public VentanaAPP() throws IOException {
@@ -24,16 +25,16 @@ public class VentanaAPP extends JFrame  implements ActionListener {
         filaCentral=new JPanel();
         filaCentral.setLayout(new GridLayout(1,3));
 
-        String ruta1 = "Resources/frozen.jpg";
-        PanelImagenes p1 = new PanelImagenes(ruta1);
+       // String ruta1 = "Resources/frozen.jpg";
+        p1 = new PanelImagenes();
         filaCentral.add(p1);
 
-        String ruta2 = "Resources/ParksAndRec.jpg";
-        PanelImagenes p2 = new PanelImagenes(ruta2);
+        //String ruta2 = "Resources/ParksAndRec.jpg";
+        p2 = new PanelImagenes();
         filaCentral.add(p2);
 
-        String ruta3 = "Resources/GoT.jpg";
-        PanelImagenes p3 = new PanelImagenes(ruta3);
+        //String ruta3 = "Resources/GoT.jpg";
+        p3 = new PanelImagenes();
         filaCentral.add(p3);
 
         this.add(filaCentral);
@@ -80,10 +81,31 @@ public class VentanaAPP extends JFrame  implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==infantil){
-            c1.setVisible(true);
-            c1.Start();
-            c2.End(); c2.setVisible(false);
-            c3.End(); c3.setVisible(false);
+
+            String ruta1 = "Resources/frozen.jpg";
+            try {
+                p1.primeraImagen(ruta1);
+                c1.setVisible(true);
+                c1.Start();
+                c2.End(); c2.setVisible(false);
+                c3.End(); c3.setVisible(false);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+
+            String ruta2 = "Resources/ParksAndRec.jpg";
+            try {
+                boolean b = true;
+                p2.siguienteImagen(b, ruta2);
+                c2.setVisible(true);
+                c2.Start();
+                c1.End(); c1.setVisible(false);
+                c3.End(); c3.setVisible(false);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
         }
 
         if(e.getSource()==comedia){
@@ -97,6 +119,12 @@ public class VentanaAPP extends JFrame  implements ActionListener {
             c3.Start();
             c1.End(); c1.setVisible(false);
             c2.End(); c2.setVisible(false);
+        }
+
+        if(e.getSource()==reiniciar){
+            c1.Reset();
+            c2.Reset();
+            c3.Reset();
         }
 
         if(e.getSource()==salir){
