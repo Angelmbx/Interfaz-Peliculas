@@ -1,3 +1,6 @@
+import Componentes.Cronometro;
+import Componentes.PanelImagenes;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -42,17 +45,17 @@ public class VentanaAPP extends JFrame  implements ActionListener {
 
 //        panelCronometro=new JPanel();
 //        panelCronometro.setLayout(new GridLayout(1,3));
-//        c1 = new Cronometro();
+//        c1 = new Componentes.Cronometro();
 //        panelCronometro.add(c1);
 //        c1.setHorizontalAlignment((int) CENTER_ALIGNMENT);
 //        c1.setVisible(false);
 //
-//        c2 = new Cronometro();
+//        c2 = new Componentes.Cronometro();
 //        panelCronometro.add(c2);
 //        c2.setHorizontalAlignment((int) CENTER_ALIGNMENT);
 //        c2.setVisible(false);
 //
-//        c3 = new Cronometro();
+//        c3 = new Componentes.Cronometro();
 //        panelCronometro.add(c3);
 //        c3.setHorizontalAlignment((int) CENTER_ALIGNMENT);
 //        c3.setVisible(false);
@@ -72,7 +75,7 @@ public class VentanaAPP extends JFrame  implements ActionListener {
 
 
         filaInferior.add(reiniciar);    reiniciar.addActionListener(this);
-        constraints.anchor = GridBagConstraints.CENTER; panelCrono.add(c1, constraints);
+        constraints.anchor = GridBagConstraints.CENTER; panelCrono.add(c1, constraints); c1.setVisible(false);
         filaInferior.add(panelCrono);
         filaInferior.add(salir);        salir.addActionListener(this);
         this.add(filaInferior, BorderLayout.SOUTH);
@@ -91,6 +94,7 @@ public class VentanaAPP extends JFrame  implements ActionListener {
 
             String ruta1 = "Resources/frozen.jpg";
             try {
+                c1.setVisible(true);
                 p1.primeraImagen(ruta1);
                 c1.setVisible(true);
                 c1.Start();

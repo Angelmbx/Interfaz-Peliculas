@@ -1,17 +1,27 @@
+package Componentes;
+
+import Eventos.EventoTiempoaCero;
+import Eventos.TiempoaCeroListener;
+
 import javax.swing.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Cronometro extends JLabel implements Serializable {
 
-    private Timer timer;
-    private TimerTask task;
+
     private int segundos;
     private int duracion;
     private boolean funcionando;
-    private String texto;
+    private Timer timer;
+    private TimerTask task;
+
+    private List<TiempoaCeroListener> listeners = new ArrayList<>();
+
 
     public int getSegundos() {
         return segundos;
@@ -19,14 +29,6 @@ public class Cronometro extends JLabel implements Serializable {
 
     public void setSegundos(int segundos) {
         this.segundos = segundos;
-    }
-
-    public String getTexto() {
-        return texto;
-    }
-
-    public void setTexto(String texto) {
-        this.texto = texto;
     }
 
     public int getDuracion() {
@@ -60,15 +62,13 @@ public class Cronometro extends JLabel implements Serializable {
 
             @Override
             public void run() {
-                    if (segundos > 0) {
-                        segundos--;
-                        texto = Integer.toString(segundos);
-                        setText(texto);
-                    } else {
-                        task.cancel();
-                    }
-
+                segundos--;
+                setText(Integer.toString(segundos));
+                if (segundos == 0) {
+                    EventoTiempoaCero tiempoaCero = new EventoTiempoaCero(this);
+                   // notifyListeners();
                 }
+            }
         };
         timer.schedule(task,0, 1000);
     }
