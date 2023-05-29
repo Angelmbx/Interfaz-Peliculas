@@ -66,7 +66,7 @@ public class Cronometro extends JLabel implements Serializable {
                 setText(Integer.toString(segundos));
                 if (segundos == 0) {
                     EventoTiempoaCero tiempoaCero = new EventoTiempoaCero(this);
-                   // notifyListeners();
+                    notifyListeners();
                 }
             }
         };
@@ -76,9 +76,20 @@ public class Cronometro extends JLabel implements Serializable {
 
     public void End(){
         task.cancel();
+        timer.purge();
     }
 
     public void Reset (){
     setSegundos(6);
     }
+
+    public void addListener(TiempoaCeroListener tiempoaCeroListener){ listeners.add(tiempoaCeroListener);}
+
+    public void notifyListeners(){
+        for (TiempoaCeroListener listener: listeners){
+            listener.tiempoACero(new EventoTiempoaCero(this));
+        }
+    }
+
+
 }
