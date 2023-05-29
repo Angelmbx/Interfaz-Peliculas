@@ -8,44 +8,72 @@ public class Cronometro extends JLabel implements Serializable {
 
     private Timer timer;
     private TimerTask task;
-    private int segundos = 10;
+    private int segundos = 30;
     private String texto;
-    private boolean funcionando;
+
+    public Timer getTimer() {
+        return timer;
+    }
+
+    public void setTimer(Timer timer) {
+        this.timer = timer;
+    }
+
+    public TimerTask getTask() {
+        return task;
+    }
+
+    public void setTask(TimerTask task) {
+        this.task = task;
+    }
+
+    public int getSegundos() {
+        return segundos;
+    }
+
+    public void setSegundos(int segundos) {
+        this.segundos = segundos;
+    }
+
+    public String getTexto() {
+        return texto;
+    }
+
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
+
     public Cronometro(){
-    this.setText("10");
-    this.funcionando=false;
+    this.setSegundos(0);
     }
 
 
-
     public void Start(){
+        this.setVisible(true);
+
         timer = new Timer();
         task = new TimerTask() {
 
             @Override
             public void run() {
-                    if (segundos > 0) {
-                        segundos--;
-                        texto = Integer.toString(segundos);
-                        setText(texto);
-                    } else {
-                        task.cancel();
-                    }
-
-                }
+                //do {
+                    segundos++;
+                    texto = Integer.toString(segundos);
+                    setText(texto);
+                //} while (texto != "-1");
+            }
         };
         timer.schedule(task,0, 1000);
     }
 
-
     public void End(){
         task.cancel();
+        this.setVisible(false);
     }
 
     public void Reset (){
-    task.cancel();
-    setText("10");
-    segundos=10;
-
+    //task.cancel();
+    setSegundos(0);
+    //this.setVisible(false);
     }
 }
