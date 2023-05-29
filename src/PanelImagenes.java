@@ -10,7 +10,6 @@ public class PanelImagenes extends JPanel implements Serializable {
     private String ruta;
     BufferedImage image;
 
-    public PanelImagenes() { }
 
     public void primeraImagen (String ruta) throws IOException {
         this.ruta = ruta;

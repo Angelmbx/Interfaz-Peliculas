@@ -13,13 +13,13 @@ public class VentanaAPP extends JFrame  implements ActionListener {
 
 
     public VentanaAPP() throws IOException {
-        this.setLayout(new GridLayout(4,1));
+        this.setLayout(new BorderLayout());
         infantil = new JButton("Infantil"); comedia=new JButton("Comedia"); exitos= new JButton("Exitos");
         filaSuperior=new JPanel();
         filaSuperior.add(infantil); infantil.addActionListener(this);
         filaSuperior.add(comedia);  comedia.addActionListener(this);
         filaSuperior.add(exitos);   exitos.addActionListener(this);
-        this.add(filaSuperior);
+        this.add(filaSuperior, BorderLayout.NORTH);
         //hasta aquí fila superior
 
         filaCentral=new JPanel();
@@ -37,42 +37,49 @@ public class VentanaAPP extends JFrame  implements ActionListener {
         p3 = new PanelImagenes();
         filaCentral.add(p3);
 
-        this.add(filaCentral);
+        this.add(filaCentral, BorderLayout.CENTER);
         //hasta aqui fila central
 
-        panelCronometro=new JPanel();
-        panelCronometro.setLayout(new GridLayout(1,3));
-        c1 = new Cronometro();
-        panelCronometro.add(c1);
-        c1.setHorizontalAlignment((int) CENTER_ALIGNMENT);
-        c1.setVisible(false);
+//        panelCronometro=new JPanel();
+//        panelCronometro.setLayout(new GridLayout(1,3));
+//        c1 = new Cronometro();
+//        panelCronometro.add(c1);
+//        c1.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+//        c1.setVisible(false);
+//
+//        c2 = new Cronometro();
+//        panelCronometro.add(c2);
+//        c2.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+//        c2.setVisible(false);
+//
+//        c3 = new Cronometro();
+//        panelCronometro.add(c3);
+//        c3.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+//        c3.setVisible(false);
 
-        c2 = new Cronometro();
-        panelCronometro.add(c2);
-        c2.setHorizontalAlignment((int) CENTER_ALIGNMENT);
-        c2.setVisible(false);
-
-        c3 = new Cronometro();
-        panelCronometro.add(c3);
-        c3.setHorizontalAlignment((int) CENTER_ALIGNMENT);
-        c3.setVisible(false);
-
-        this.add(panelCronometro);
+//        this.add(panelCronometro);
         //hasta aqui panel cronometro
 
 
         filaInferior=new JPanel();
+        filaInferior.setLayout(new GridLayout(1,3));
+        GridBagConstraints constraints = new GridBagConstraints();
 
         reiniciar=new JButton("Reiniciar");
+        c1 = new Cronometro();
+        JPanel panelCrono = new JPanel();
         salir=new JButton("Salir");
 
-        filaInferior.add(reiniciar); reiniciar.addActionListener(this);
-        filaInferior.add(salir);     salir.addActionListener(this);
-        this.add(filaInferior);
+
+        filaInferior.add(reiniciar);    reiniciar.addActionListener(this);
+        constraints.anchor = GridBagConstraints.CENTER; panelCrono.add(c1, constraints);
+        filaInferior.add(panelCrono);
+        filaInferior.add(salir);        salir.addActionListener(this);
+        this.add(filaInferior, BorderLayout.SOUTH);
         //hasta aqui fila inferior
 
 
-        this.setSize(720,800);
+        this.setSize(720,400);
         this.setTitle("Catálogo");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
