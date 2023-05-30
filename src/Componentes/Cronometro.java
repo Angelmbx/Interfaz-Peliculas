@@ -4,6 +4,7 @@ import Eventos.EventoTiempoaCero;
 import Eventos.TiempoaCeroListener;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -66,7 +67,12 @@ public class Cronometro extends JLabel implements Serializable {
                 setText(Integer.toString(segundos));
                 if (segundos == 0) {
                     EventoTiempoaCero tiempoaCero = new EventoTiempoaCero(this);
-                    notifyListeners();
+                    task.cancel();
+                    try {
+                        notifyListeners();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         };
@@ -81,11 +87,12 @@ public class Cronometro extends JLabel implements Serializable {
 
     public void Reset (){
     setSegundos(6);
+    this.Start();
     }
 
     public void addListener(TiempoaCeroListener tiempoaCeroListener){ listeners.add(tiempoaCeroListener);}
 
-    public void notifyListeners(){
+    public void notifyListeners() throws IOException {
         for (TiempoaCeroListener listener: listeners){
             listener.tiempoACero(new EventoTiempoaCero(this));
         }

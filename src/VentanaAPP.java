@@ -108,7 +108,7 @@ public class VentanaAPP extends JFrame  implements ActionListener {
             String ruta2 = "Resources/ParksAndRec.jpg";
             try {
                 boolean b = true;
-                p2.siguienteImagen(b, ruta2);
+                p2.siguienteImagen(ruta2);
                 c2.setVisible(true);
                 c2.Start();
                 c1.End(); c1.setVisible(false);
